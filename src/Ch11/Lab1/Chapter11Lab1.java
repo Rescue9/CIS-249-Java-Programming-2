@@ -38,11 +38,13 @@ public class Chapter11Lab1 {
 				"do not want to fill the triangle with color please enter false.");
 		
 			filled = input.nextBoolean();
-		
+					
 			if (filled == false){
-				color = " No color";
+				color = "No color";
 				triangle.setColor(color);
 			}
+			
+			System.out.println(triangle.getColor());
 		
 			triangle.setFilled(filled);
 		

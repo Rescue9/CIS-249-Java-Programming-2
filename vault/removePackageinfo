@@ -1,0 +1,1 @@
+sed -i 's/package Ch11.Lab1;/\/\/package Ch11.Lab1;/g' *.java

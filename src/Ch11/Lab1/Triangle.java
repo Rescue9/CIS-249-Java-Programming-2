@@ -54,6 +54,10 @@ public class Triangle extends GeometricObject {
 		return color;
 	}
 	
+	public void setColor(String color){
+		this.color = color;
+	}
+	
 	/** Implement the abstract method findCircumference in
 	 * GeometricObject
 	 */
