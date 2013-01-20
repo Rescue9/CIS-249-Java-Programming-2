@@ -54,12 +54,6 @@ public class Triangle extends GeometricObject {
 		return color;
 	}
 	
-	/** Implement the abstract method findArea in GeometricObject */
-	public double getArea(){
-		double s = (side1 + side2 + side3) / 2;
-		return Math.sqrt(s * (s - side1) * (s - side2) * (s - side3));
-	}
-	
 	/** Implement the abstract method findCircumference in
 	 * GeometricObject
 	 */
