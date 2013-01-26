@@ -14,8 +14,8 @@ package Ch11.Prog1;
 import java.util.ArrayList;
 
 public class Course {
-	private ArrayList<String> courseName = new ArrayList<>();
-	private ArrayList<String> students = new ArrayList<>();
+	private ArrayList<String> courseName = new ArrayList<String>();
+	private ArrayList<String> students = new ArrayList<String>();
 
 	public Course(){	
 	}
