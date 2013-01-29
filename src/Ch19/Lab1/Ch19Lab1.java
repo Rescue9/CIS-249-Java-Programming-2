@@ -17,8 +17,14 @@ public class Ch19Lab1 {
 	
 	public static void main(String[] args){
 		
+		// added the code below to create an archive directory to
+		// keep structure of package cleaner
+		File dir = new File("./archives");
+		dir.mkdir();
+		
 		// the File class links to the name of the file to be read
-		File file = new File("Ch19Lab1File.txt");
+
+		File file = new File("./archives/Ch19Lab1File.txt");
 		
 		int ch;
 		
@@ -31,7 +37,7 @@ public class Ch19Lab1 {
 		try {
 			// construct a Formatter object that uses the FileOutputStream class to link to
 			// the text file to be downloaded to
-			Formatter output = new Formatter(new FileOutputStream("Ch19Lab1File.txt", true));
+			Formatter output = new Formatter(new FileOutputStream("./archives/Ch19Lab1File.txt", true));
 			
 			// generate 100 random numbers
 			for (int i = 0; i < 100; i++){
