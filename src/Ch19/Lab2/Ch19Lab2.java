@@ -40,7 +40,30 @@ public class Ch19Lab2 {
 			
 			System.out.println("\nCount is " + count);
 			System.out.println("\nTotal is " + total);
-		} 
+		} catch (FileNotFoundException ex){
+			System.out.println("File not found");
+		} catch (IOException ex){
+			System.out.println(ex.getMessage());
+		} finally {
+			try {
+				// Close files
+				if (dis != null)dis.close();
+			} catch (IOException ex){
+				System.out.println(ex);
+			}
+			
+		}
+		
+		// output to a different file using the FileOutputStream, and DataOutputStream classes
+		try {
+			output = new DataOutputStream(new FileOutputStream("./archives/Ch19Lab2_OUT.dat"));
+			
+			for (int i=0; i<100; i++)
+				output.writeInt((int)(Math.random() * 100000));
+		} catch (IOException e) {
+			System.out.println("Unable to create file");
+		}
+		
 	}
 
 }
