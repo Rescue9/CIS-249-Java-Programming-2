@@ -39,7 +39,7 @@ public class Ch19Lab2 {
 			}
 			
 			System.out.println("\nCount is " + count);
-			System.out.println("\nTotal is "= total);
+			System.out.println("\nTotal is " + total);
 		} 
 	}
 
