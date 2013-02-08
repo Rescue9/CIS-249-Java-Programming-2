@@ -18,7 +18,7 @@ public class Ch12Lab2 extends JFrame {
 
 	private static final long serialVersionUID = 1L; // eclipse complains
 	
-	// alstered image location for package clarity
+	// altered image location for package clarity
 	public ImageIcon cross = new ImageIcon("archives/Ch12/image/x.gif");
 	public ImageIcon not = new ImageIcon("archives/Ch12/image/o.gif");
 	
