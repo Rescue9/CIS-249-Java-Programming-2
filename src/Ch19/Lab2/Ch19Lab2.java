@@ -23,12 +23,12 @@ public class Ch19Lab2 {
 		try {
 			
 			// creating folder if necessary for package clarity
-			File folder = new File("./archives");
+			File folder = new File("./archives/Ch19");
 			folder.mkdir();
 			
 			// create data input stream
 			
-			dis = new DataInputStream(new FileInputStream("./archives/Ch19Lab2.dat"));
+			dis = new DataInputStream(new FileInputStream("./archives/Ch19/Ch19Lab2.dat"));
 			
 			int total = 0;
 			while (dis.available() > 0){
@@ -56,7 +56,7 @@ public class Ch19Lab2 {
 		
 		// output to a different file using the FileOutputStream, and DataOutputStream classes
 		try {
-			output = new DataOutputStream(new FileOutputStream("./archives/Ch19Lab2_OUT.dat"));
+			output = new DataOutputStream(new FileOutputStream("./archives/Ch19/Ch19Lab2_OUT.dat"));
 			
 			for (int i=0; i<100; i++)
 				output.writeInt((int)(Math.random() * 100000));
