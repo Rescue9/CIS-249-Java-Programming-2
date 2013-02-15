@@ -1,4 +1,4 @@
-package Ch16.lab1;
+package Ch16.Lab1;
 
 import java.awt.Dimension;
 import java.awt.Graphics;
