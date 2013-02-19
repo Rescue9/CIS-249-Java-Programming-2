@@ -16,10 +16,12 @@ import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.Graphics;
 import java.awt.GridLayout;
-
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 public class Ch16Prog1 extends JFrame {
@@ -27,24 +29,93 @@ public class Ch16Prog1 extends JFrame {
 	private static final long serialVersionUID = 1L; // eclipse complains
 	private static final int PANEL_WIDTH = 400;
 	private static final int PANEL_HEIGHT = 300;
+	protected static int sizeX = 20;
+	protected static int sizeY = 20;
+	protected static int x = 350;
+	protected static int y = 200;
 	
 	public Ch16Prog1(){
+		final CreateOval myOval = new CreateOval();
 		
 		this.setLayout(new BorderLayout());
 		
 		// top panel
 		JPanel panel = new JPanel();
-		panel.setLayout(new GridLayout(1,1));
-		panel.add(new OvalComponent());
+		panel.setLayout(new FlowLayout());
+		panel.add(myOval);
 		
 		// button panel
-		JPanel buttonPanel = new JPanel();
+		JPanel buttonPanel = new JPanel(new FlowLayout());
 		
 		JButton jbtnLeft = new JButton("Left");
 		JButton jbtnRight = new JButton("Right");
 		JButton jbtnUp = new JButton("Up");
 		JButton jbtnDown= new JButton("Down");
 		
+		jbtnLeft.addActionListener(new ActionListener(){
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if (x <= 0){
+					x = 0;
+					repaint();
+					JOptionPane.showMessageDialog(null, "You cannot move the oval off the frame");
+				}
+				else{
+					x = x - 10;
+					repaint();
+				}
+			}
+		});
+
+		jbtnRight.addActionListener(new ActionListener(){
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if (x >= PANEL_WIDTH - sizeX){
+					x = 0;
+					repaint();
+					JOptionPane.showMessageDialog(null, "You cannot move the oval off the frame");
+				}
+				else{
+					x = x + 10;
+					repaint();
+				}
+			}
+		});
+
+		jbtnUp.addActionListener(new ActionListener(){
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if (y <= 0){
+					y = 0;
+					repaint();
+					JOptionPane.showMessageDialog(null, "You cannot move the oval off the frame");
+				}
+				else{
+					y = y - 10;
+					repaint();
+				}
+			}
+		});
+
+		jbtnDown.addActionListener(new ActionListener(){
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if (y >= PANEL_HEIGHT - sizeY){
+					y = 0;
+					repaint();
+					JOptionPane.showMessageDialog(null, "You cannot move the oval off the frame");
+				}
+				else{
+					y = y + 10;
+					repaint();
+				}
+			}
+		});
+
 		buttonPanel.setLayout(new FlowLayout());
 		
 		buttonPanel.add(jbtnLeft);
@@ -57,11 +128,11 @@ public class Ch16Prog1 extends JFrame {
 		
 	}
 	
-	static class OvalComponent extends JComponent {
+	static class CreateOval extends JComponent {
 		public void paintComponent(Graphics g){
 			super.paintComponent(g);
 			g.setColor(Color.BLACK);
-			g.drawOval(PANEL_HEIGHT / 2, PANEL_WIDTH / 2, 20, 20);
+			g.drawOval(x, y, sizeX, sizeY);
 		}
 	}
 	
