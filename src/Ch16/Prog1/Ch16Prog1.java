@@ -15,7 +15,6 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.Graphics;
-import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
@@ -38,11 +37,6 @@ public class Ch16Prog1 extends JFrame {
 		final CreateOval myOval = new CreateOval();
 		
 		this.setLayout(new BorderLayout());
-		
-		// top panel
-		JPanel panel = new JPanel();
-		panel.setLayout(new FlowLayout());
-		panel.add(myOval);
 		
 		// button panel
 		JPanel buttonPanel = new JPanel(new FlowLayout());
@@ -72,8 +66,8 @@ public class Ch16Prog1 extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if (x >= PANEL_WIDTH - sizeX){
-					x = 0;
+				if (x + 2*sizeX >= myOval.getWidth()){
+					x = myOval.getWidth() - sizeX - 1;
 					repaint();
 					JOptionPane.showMessageDialog(null, "You cannot move the oval off the frame");
 				}
@@ -104,8 +98,8 @@ public class Ch16Prog1 extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if (y >= PANEL_HEIGHT - sizeY){
-					y = 0;
+				if (y + 2*sizeY >= myOval.getHeight()){
+					y = myOval.getHeight() - sizeY - 1;
 					repaint();
 					JOptionPane.showMessageDialog(null, "You cannot move the oval off the frame");
 				}
@@ -123,12 +117,15 @@ public class Ch16Prog1 extends JFrame {
 		buttonPanel.add(jbtnUp);
 		buttonPanel.add(jbtnDown);
 		
-		this.add(panel, BorderLayout.CENTER);
+		this.add(myOval, BorderLayout.CENTER);
 		this.add(buttonPanel, BorderLayout.SOUTH);
 		
 	}
 	
 	static class CreateOval extends JComponent {
+		
+		private static final long serialVersionUID = 1L; // eclipse complains
+
 		public void paintComponent(Graphics g){
 			super.paintComponent(g);
 			g.setColor(Color.BLACK);
