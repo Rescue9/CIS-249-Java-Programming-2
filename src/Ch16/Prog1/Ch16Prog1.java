@@ -30,8 +30,8 @@ public class Ch16Prog1 extends JFrame {
 	private static final int PANEL_HEIGHT = 300;
 	protected static int sizeX = 20;
 	protected static int sizeY = 20;
-	protected static int x = 350;
-	protected static int y = 200;
+	protected static int x = 50;
+	protected static int y = 20;
 	
 	public Ch16Prog1(){
 		final CreateOval myOval = new CreateOval();
@@ -50,7 +50,7 @@ public class Ch16Prog1 extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if (x <= 0){
+				if (x - (.5 * sizeX) <= 0){
 					x = 0;
 					repaint();
 					JOptionPane.showMessageDialog(null, "You cannot move the oval off the frame");
@@ -82,7 +82,7 @@ public class Ch16Prog1 extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if (y <= 0){
+				if (y - (.5 * sizeY) <= 0){
 					y = 0;
 					repaint();
 					JOptionPane.showMessageDialog(null, "You cannot move the oval off the frame");
