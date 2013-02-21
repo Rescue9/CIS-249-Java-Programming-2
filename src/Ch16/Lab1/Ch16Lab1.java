@@ -8,7 +8,7 @@
  * for said polygon.
  */
 
-package Ch16;
+package Ch16.Lab1;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
