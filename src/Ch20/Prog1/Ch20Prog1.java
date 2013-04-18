@@ -20,10 +20,12 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 public class Ch20Prog1 extends JFrame{
+	
+	private static final long serialVersionUID = 1L; // eclipse complains
 	// declare objects
 	JTextField orderInput = new JTextField(5);
 	JLabel orderLabel = new JLabel("Enter an Order");
-	private Ch20Prog1Panel trianglePane = new Ch20Prog1Panel();
+	private Ch20Prog1Panel snowFlakePane = new Ch20Prog1Panel();
 	
 	public Ch20Prog1() {
 		// setup order panel
@@ -35,14 +37,14 @@ public class Ch20Prog1 extends JFrame{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				String orderNum = ((JTextField) e.getSource()).getText();
-				trianglePane.setOrder(Integer.parseInt(orderNum));
+				snowFlakePane.setOrder(Integer.parseInt(orderNum));
 			}
 
 			
 		});
 		
 		this.setLayout(new BorderLayout());
-		this.add(trianglePane, BorderLayout.CENTER);
+		this.add(snowFlakePane, BorderLayout.CENTER);
 		this.add(orderPanel, BorderLayout.SOUTH);
 	}
 	
@@ -76,38 +78,42 @@ public class Ch20Prog1 extends JFrame{
 			super.paintComponent(g);
 			
 			// select three points in proportion to the panel size
+			// and here is where my math fu broke down. I needed help with the equations.
+
+			int side = (int)(Math.min(getWidth(), getHeight()) * 0.8D);
+			int triangleHeight = (int)(side * Math.sin(Math.toRadians(60.0D)));
+
 			Point p1 = new Point(getWidth() / 2, 10);
-			Point p2 = new Point(10, getHeight() - 10);
-			Point p3 = new Point(getWidth() - 10, getHeight() - 10);
+			Point p2 = new Point(getWidth() / 2 - side / 2, 10 + triangleHeight);
+			Point p3 = new Point(getWidth() / 2 + side / 2, 10 + triangleHeight);
 			
-			displayTriangles(g, order, p1, p2, p3);
+			displayKochSnowFlake(g, order, p1, p2);
+			displayKochSnowFlake(g, order, p2, p3);
+			displayKochSnowFlake(g, order, p3, p1);
+						
 		}
 		
-		private static void displayTriangles(Graphics g, int order, Point p1, Point p2, Point p3){
+		private static void displayKochSnowFlake(Graphics g, int order, Point p1, Point p5) {
+			int changeX = p5.x - p1.x;
+			int changeY = p5.y - p1.y;
 			
-			if(order >=0){
-				// draw a triangle to connect three points
-				g.drawLine(p1.x, p1.y, p2.x, p2.y);
-				g.drawLine(p1.x, p1.y, p3.x, p3.y);
-				g.drawLine(p2.x, p2.y, p3.x, p3.y);
+			Point p2, p3, p4;
+			
+			if (order == 0){
+				g.drawLine(p1.x, p1.y, p5.x, p5.y);
+			}
+			else {
+				// and here is where my math fu broke down. I needed help with the equations.
+				p2 = new Point (p1.x + changeX / 3, p1.y + changeY / 3);
+				p3 = new Point ((int)((p1.x + p5.x) / 2 + Math.cos(Math.toRadians(30.0D)) * (p1.y - p5.y) / 3.0D),
+						(int)((p1.y + p5.y) / 2 + Math.cos(Math.toRadians(30.0D)) * (p5.x - p1.x) / 3.0D));
+				p4 = new Point (p1.x + changeX * 2/3, p1.y + changeY *2/3);
 				
-				// get three midpoints in the triangle
-				Point midBetweenP1P2 = midpoint(p1,p2);
-				Point midBetweenP2P3 = midpoint(p2,p3);
-				Point midBetweenP3P1 = midpoint(p3,p1);
-				
-				// recursively display three tirangles
-				displayTriangles(g, order - 1 , p1, midBetweenP1P2, midBetweenP3P1);
-				displayTriangles(g, order - 1 , midBetweenP1P2, p2, midBetweenP2P3);
-				displayTriangles(g, order - 1 , midBetweenP3P1, midBetweenP2P3, p3);
+				displayKochSnowFlake(g, order - 1, p1, p2);
+				displayKochSnowFlake(g, order - 1, p2, p3);
+				displayKochSnowFlake(g, order - 1, p3, p4);
+				displayKochSnowFlake(g, order - 1, p4, p5);
 			}
 		}
-		
-		private static Point midpoint(Point p1, Point p2){
-			
-			return new Point((p1.x + p2.x) / 2, (p1.y + p2.y) / 2);
-		}
 	}
-
-
 }
