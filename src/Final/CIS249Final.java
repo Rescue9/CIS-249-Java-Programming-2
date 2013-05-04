@@ -152,8 +152,18 @@ public class CIS249Final extends JApplet {
 		while (i < jbtPosition.length){
 			jbtPosition[i] = new JButton("Post Position " + (i+1));
 			jbtPosition[i].setBackground(Color.YELLOW);
+			jbtPosition[i].addActionListener(new ActionListener(){
+				public void actionPerformed(ActionEvent e) {
+					jtfDisplay.setText("You have placed " + determineBet() + " on the horse in " + e.getActionCommand() + ". "
+							+ " Hope your horse wins!");
+				}				
+			});
 			i++;
 		}
+	}
+	
+	private String determineBet(){
+		return "BET AMOUNT";
 	}
 	
 	public String determineFont(){
