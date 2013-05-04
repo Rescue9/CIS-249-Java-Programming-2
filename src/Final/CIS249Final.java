@@ -17,6 +17,7 @@ import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.*;
 import java.text.DecimalFormat;
 import java.util.Arrays;
 import java.util.List;
@@ -75,6 +76,10 @@ public class CIS249Final extends JApplet {
 		// add the betting textfield
 		panel[3].setLayout(new BorderLayout());
 		panel[3].add(jtfBet);
+		
+		// add bet button to text field
+		panel[4].setLayout(new BorderLayout());
+		panel[4].add(jbtPlaceBet);
 		
 		for (int i = 0; i< panel.length; i++){
 		add(panel[i]);
@@ -165,6 +170,17 @@ public class CIS249Final extends JApplet {
 			});
 			i++;
 		}
+		
+		// creating place bets button
+		jbtPlaceBet.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e) {
+				try {
+					writeData(jtfDisplay.getText());
+				} catch (IOException ex) {
+					System.out.println(ex);
+				}
+			}			
+		});
 	}
 	
 	private String determineBet(){
@@ -187,5 +203,14 @@ public class CIS249Final extends JApplet {
 			return useFont;
 		} else useFont = "Sans Serif";
 		return useFont;
+	}
+	
+	public void writeData(String output) throws IOException{
+		try {
+			HandleData outputData = new HandleData();
+			outputData.writeData(output);
+		} catch (IOException ex){
+			System.out.println(ex);
+		}
 	}
 }
