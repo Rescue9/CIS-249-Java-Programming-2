@@ -6,24 +6,27 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 
 import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class HandleData {
-	DataOutputStream output = new DataOutputStream(new FileOutputStream(new File("./archives/Final/CIS249Final.dat")));
-	SimpleDateFormat timestamp = new SimpleDateFormat("EEE, d MMM yyyy HH:mm:ss");
+	DataOutputStream output = new DataOutputStream(new FileOutputStream(new File("./archives/Final/CIS249Final.dat"), true));
+	SimpleDateFormat simpleDateFormat = new SimpleDateFormat("EEE, d MMM yyyy HH:mm:ss");
+	
 
 	public HandleData() throws IOException {
 		try {
-			output.writeChars(timestamp.toString());
+			output.writeChars(simpleDateFormat.format(new Date()));
 		} catch (IOException ex){
 			System.out.println(ex);
 		}
 	}
 	
-	public void writeData(String bet) throws IOException{
+	public HandleData(String bet) throws IOException{
 		try{
-			String combinedOutput = (String)(timestamp + "\t" + output);
+			String combinedOutput = simpleDateFormat.format(new Date()) + "\t" + bet + "\n";
 			System.out.println(combinedOutput);
 			output.writeChars(combinedOutput);
+			output.close();
 		} catch (IOException ex){
 			System.out.println(ex);
 		}
