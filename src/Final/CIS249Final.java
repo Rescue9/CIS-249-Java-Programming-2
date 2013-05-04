@@ -17,6 +17,7 @@ import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.DecimalFormat;
 import java.util.Arrays;
 import java.util.List;
 
@@ -39,6 +40,8 @@ public class CIS249Final extends JApplet {
 	private JButton[] jbtPosition = new JButton[4]; 
 	
 	private JPanel panel[] = new JPanel[5];
+	
+	DecimalFormat df = new DecimalFormat("$###.00");
 	
 	public CIS249Final() {
 		// set out layout
@@ -69,7 +72,9 @@ public class CIS249Final extends JApplet {
 			panel[2].add(jbtPosition[i]);
 		}
 		
-		
+		// add the betting textfield
+		panel[3].setLayout(new BorderLayout());
+		panel[3].add(jtfBet);
 		
 		for (int i = 0; i< panel.length; i++){
 		add(panel[i]);
@@ -163,7 +168,10 @@ public class CIS249Final extends JApplet {
 	}
 	
 	private String determineBet(){
-		return "BET AMOUNT";
+		double holding = Integer.parseInt(jtfBet.getText());
+		String betAmount = df.format(holding);
+		
+		return betAmount;
 	}
 	
 	public String determineFont(){
