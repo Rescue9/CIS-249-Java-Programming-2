@@ -10,8 +10,10 @@ package Final;
 
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.GraphicsEnvironment;
+import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -48,13 +50,25 @@ public class CIS249Final extends JApplet {
 		// create panels
 		createPanels();
 		
+		// create buttons
+		createButtons();
+		
 		// add the welcome message & set the font
 		jlblWelcome.setText(WELCOME_TEXT);
-		panel[1].add(jlblWelcome);
+		panel[0].setLayout(new GridBagLayout());
+		panel[0].add(jlblWelcome);
 		jlblWelcome.setFont(new Font(determineFont(), Font.PLAIN, 20));
 		
 		// add the display textfield
-		panel[2].add(jtfDisplay);
+		panel[1].setLayout(new BorderLayout());
+		panel[1].add(jtfDisplay);
+		
+		// add button panel
+		panel[2].setLayout(new GridLayout(1,4));
+		for (int i = 0; i < jbtPosition.length; i++){
+			panel[2].add(jbtPosition[i]);
+		}
+		
 		
 		
 		for (int i = 0; i< panel.length; i++){
@@ -133,13 +147,22 @@ public class CIS249Final extends JApplet {
 		}
 	}
 	
+	public void createButtons(){
+		int i = 0;
+		while (i < jbtPosition.length){
+			jbtPosition[i] = new JButton("Post Position " + (i+1));
+			jbtPosition[i].setBackground(Color.YELLOW);
+			i++;
+		}
+	}
+	
 	public String determineFont(){
 		GraphicsEnvironment e = GraphicsEnvironment.getLocalGraphicsEnvironment();
 		String[] fontNames = e.getAvailableFontFamilyNames();
 		
 		// convert to list for easier use
 		List<String> fontList = Arrays.asList(fontNames);
-		//System.out.println(fontList);	// TODO used for testing
+		//System.out.println(fontList);	// used for testing
 		String useFont;
 		if (fontList.contains("Roboto Lt")){
 			useFont = "Roboto Lt";
